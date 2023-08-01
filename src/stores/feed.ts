@@ -8,6 +8,7 @@ import router from '@/router'
 export const useFeedStore = defineStore('feed', {
   state: () => {
     return {
+      fbFeeds: [] as any,
       feeds: [] as any,
       feedsCollectionRef: collection(db, "feeds"),
       length: 0

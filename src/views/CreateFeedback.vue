@@ -40,6 +40,7 @@
               id="categories"
               class="block w-full px-6 py-3 text-sm text-indigo-900 bg-gray-100 border border-gray-300 rounded-lg outline-indigo-900 focus:ring-blue-500 focus:border-blue-500"
             >
+              <option disabled selected>All</option>
               <option selected v-for="category in Categories" :key="category">
                 {{ category }}
               </option>
@@ -88,7 +89,7 @@ const feedStore = useFeedStore()
 const newFeed = reactive<NewFeed>({
   id: '',
   title: '',
-  categories: Categories.ALL,
+  categories: Categories.FEATURE,
   detail: ''
 })
 

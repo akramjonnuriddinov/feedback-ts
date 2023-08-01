@@ -48,7 +48,6 @@ const getCurrentUser = () => {
       (user: any) => {
         removeListener()
         resolve(user)
-        console.log(user.displayName)
       },
       reject
     )

@@ -26,14 +26,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRoute } from 'vue-router'
 import { db } from '@/firebase'
 import { collection, addDoc } from 'firebase/firestore'
 
 const commentsCollectionRef = collection(db, 'comments')
-
-const route = useRoute()
-console.log(route.params.id)
 
 const props = defineProps({
   title: String,

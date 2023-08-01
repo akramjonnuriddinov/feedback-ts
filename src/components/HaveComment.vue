@@ -82,6 +82,5 @@ const openNestedComment = (id: String) => {
       item.isOpen = !item.isOpen
     }
   })
-  console.log(commentStore.comments)
 }
 </script>

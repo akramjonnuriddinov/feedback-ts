@@ -5,7 +5,6 @@ export enum btn {
 }
 
 export enum Categories {
-  ALL = 'All',
   FEATURE = 'Feature',
   UX = 'UX',
   UI = 'UI',

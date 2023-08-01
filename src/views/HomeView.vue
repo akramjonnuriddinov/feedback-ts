@@ -46,6 +46,7 @@ const getFeeds = () => {
       } as any
 
       await feedStore.feeds.push(feed)
+      await feedStore.fbFeeds.push(feed)
       feedStore.length = await feedStore.feeds.length
     })
   })
@@ -53,8 +54,6 @@ const getFeeds = () => {
 
 onMounted(() => {
   getFeeds()
-})
-onMounted(() => {
   const auth = getAuth()
   onAuthStateChanged(auth, (user) => {
     if (user) {

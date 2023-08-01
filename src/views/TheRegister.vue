@@ -127,11 +127,9 @@ const errorMessage = ref('')
 
 const register = () => {
   createUserWithEmailAndPassword(getAuth(), user.email, user.password)
-    .then(async (data) => {
-      console.log(data)
+    .then(async () => {
       router.push({ name: 'home' })
       authStore.isLoggedIn = true
-      console.log(data)
     })
     .catch((err) => {
       console.log(err.code)
