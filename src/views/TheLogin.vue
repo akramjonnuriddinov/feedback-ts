@@ -100,13 +100,10 @@ const user = reactive({
 const singIn = () => {
   const auth = getAuth()
   signInWithEmailAndPassword(auth, user.email, user.password)
-    .then((userCredential) => {
+    .then(() => {
       router.push({ name: 'home' })
-      console.log(userCredential)
     })
     .catch((error) => {
-      const errorCode = error.code
-      const errorMessage = error.message
       console.log(error)
     })
 }

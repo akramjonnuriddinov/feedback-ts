@@ -1,4 +1,4 @@
-1. Authentication: Sing up✅ [feature] & Sing in [feature]
+1. Authentication: Sing up✅ [feature] && Sing in✅ [feature]
 2. Sorted by added time [feature]
 3. Filter Feed [feature]
 4. Comment Filter for each page [feature]

@@ -25,14 +25,16 @@ import HaveFeedback from '@/components/HaveFeedback.vue'
 import TheLoader from '@/components/TheLoader.vue'
 import { useFeedStore } from '@/stores/feed'
 import { onMounted } from 'vue'
-import { onSnapshot } from 'firebase/firestore'
+import { onSnapshot, query, orderBy } from 'firebase/firestore'
 import { useAuthStore } from '@/stores/auth'
 
 const feedStore = useFeedStore()
 const authStore = useAuthStore()
 
+const feedsCollectionQuery = query(feedStore.feedsCollectionRef, orderBy('date', 'desc'))
+
 const getFeeds = () => {
-  onSnapshot(feedStore.feedsCollectionRef, async (querySnapshot) => {
+  onSnapshot(feedsCollectionQuery, async (querySnapshot) => {
     feedStore.feeds = []
     feedStore.length = await feedStore.feeds.length
     querySnapshot.forEach(async (doc) => {

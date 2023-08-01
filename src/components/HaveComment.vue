@@ -18,7 +18,7 @@
       <div class="w-full">
         <div class="flex items-center justify-between w-full mb-4">
           <h3 class="flex flex-col text-sm">
-            <span class="font-bold text-indigo-900">{{ authStore.currentUser }}</span>
+            <span class="font-bold text-indigo-900">{{ authStore.currentUser.email }}</span>
             <!-- <span class="w-32 overflow-hidden whitespace-nowrap">@{{ generate() }}</span> -->
           </h3>
           <button
