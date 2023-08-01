@@ -37,6 +37,9 @@ export default {
       },
       borderRadius: {
         10: '10px'
+      },
+      borderColor: {
+        primary: '#AD1FEA'
       }
     }
   },

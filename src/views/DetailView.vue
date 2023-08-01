@@ -35,18 +35,43 @@
       </div>
     </div>
 
-    <!-- <have-comment /> -->
-    <!-- <add-comment title="Add Comment" placeholder="Type your comment here" /> -->
+    <have-comment />
+    <create-comment title="Add Comment" placeholder="Type your comment here" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useFeedStore } from '@/stores/feed'
+import HaveComment from '@/components/HaveComment.vue'
+import CreateComment from '@/components/CreateComment.vue'
+import { onSnapshot } from 'firebase/firestore'
 
 const feedStore = useFeedStore()
 const route = useRoute()
+
+const getFeeds = async () => {
+  await onSnapshot(feedStore.feedsCollectionRef, async (querySnapshot) => {
+    feedStore.feeds = []
+    feedStore.length = await feedStore.feeds.length
+    querySnapshot.forEach(async (doc) => {
+      const feed = {
+        id: doc.id,
+        title: doc.data().title,
+        category: doc.data().category,
+        detail: doc.data().detail
+      } as any
+
+      await feedStore.feeds.push(feed)
+      feedStore.length = await feedStore.feeds.length
+    })
+  })
+}
+
+onMounted(async () => {
+  await getFeeds()
+})
 
 const feeds = computed(() => {
   return feedStore.feeds.filter((item: any) => item.id === route.params.id)

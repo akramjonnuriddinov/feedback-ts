@@ -1,0 +1,23 @@
+1. Authentication: Sing up✅ [feature] & Sing in [feature]
+2. Sorted by added time [feature]
+3. Filter Feed [feature]
+4. Comment Filter for each page [feature]
+5. Nested Comment [feature]
+6. Comment count in the HomeView [feature]
+7. Edit Feedback [feature]
+8. Responsiveness for Mobile [feature]
+9. Make APK version [feature]
+10. Not Feedback [bug]
+11. Loading [feature]
+12. Error message genarate [feature] ✅
+13. Logout [feature]
+
+Ro'yxatdan o'tish nimaga kerak?
+  1. Ro'yxatdan o'tgandan keyin username headerda chiqib turishi kerak va o'chib ketmasligi kerak. Uni to'g'ridan to'g'ri firebasedan olishi kerak. Uning uchun accessToken orqali firebasega request jo'natish kerak bo'ladi.
+  2. Profileni tahrirlash bo'limi bo'lishi kerak va u bo'lim orqali usernameni o'zgartirishi va profilega rasm qo'yishi mumkin bo'lishi kerak
+  3. Ro'yxatdan o'tgandan keyin feedback yoki comment yozishi mumkin bo'lishi kerak.
+  4. Ro'yxatdan o'tmagan foydalanuvchi uchun addFeedback yo'q bo'lishi kerak
+  5. Link orqali addFeedback ga o'tgandan router guard qaytarib yuborishi kerak
+
+Muammo:
+  1. Current Userni display nameni o'rnatib bo'lmayapti

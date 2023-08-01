@@ -16,19 +16,51 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import TheHeader from '@/components/TheHeader.vue'
 import FeedbackBoard from '@/components/FeedbackBoard.vue'
 import FilterFeedback from '@/components/FilterFeedback.vue'
 import NotFeedback from '@/components/NotFeedback.vue'
 import HaveFeedback from '@/components/HaveFeedback.vue'
 import TheLoader from '@/components/TheLoader.vue'
-// FEED-STORE
 import { useFeedStore } from '@/stores/feed'
+import { onMounted } from 'vue'
+import { onSnapshot } from 'firebase/firestore'
+import { useAuthStore } from '@/stores/auth'
 
 const feedStore = useFeedStore()
+const authStore = useAuthStore()
+
+const getFeeds = () => {
+  onSnapshot(feedStore.feedsCollectionRef, async (querySnapshot) => {
+    feedStore.feeds = []
+    feedStore.length = await feedStore.feeds.length
+    querySnapshot.forEach(async (doc) => {
+      const feed = {
+        id: doc.id,
+        title: doc.data().title,
+        category: doc.data().category,
+        detail: doc.data().detail
+      } as any
+
+      await feedStore.feeds.push(feed)
+      feedStore.length = await feedStore.feeds.length
+    })
+  })
+}
 
 onMounted(() => {
-  feedStore.getFeeds()
+  getFeeds()
+})
+onMounted(() => {
+  const auth = getAuth()
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      authStore.currentUser = user
+      authStore.isLoggedIn = true
+    } else {
+      console.log('user is singed out')
+    }
+  })
 })
 </script>
