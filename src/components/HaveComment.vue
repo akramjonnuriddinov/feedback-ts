@@ -1,10 +1,10 @@
 <template>
   <div class="pt-6 pb-8 mb-6 pr-8 bg-white rounded-10 pl-7.5">
     <h2 class="w-full text-lg font-bold text-indigo-900 truncate max-w-600">
-      {{ commentStore.comments.length }} Comments
+      {{ commentsLen }} Comments
     </h2>
     <div
-      v-for="(comment, index) in commentStore.comments"
+      v-for="(comment, index) in comments"
       :key="index"
       class="flex items-center pt-8 pb-8 border-b"
     >
@@ -19,7 +19,6 @@
         <div class="flex items-center justify-between w-full mb-4">
           <h3 class="flex flex-col text-sm">
             <span class="font-bold text-indigo-900">{{ authStore.currentUser.email }}</span>
-            <!-- <span class="w-32 overflow-hidden whitespace-nowrap">@{{ generate() }}</span> -->
           </h3>
           <button
             @click="openNestedComment(comment.uniqueId)"
@@ -37,16 +36,15 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, computed } from 'vue'
 import NestedComment from './NestedComment.vue'
 import CreateComment from '@/components/CreateComment.vue'
 import { onSnapshot } from 'firebase/firestore'
-import { useRoute } from 'vue-router'
 import { useCommentStore } from '@/stores/comments'
 import { useAuthStore } from '@/stores/auth'
+import { useRoute } from 'vue-router'
 
 const authStore = useAuthStore()
-
 const route = useRoute()
 
 const commentStore = useCommentStore()
@@ -55,25 +53,35 @@ const getComments = () => {
   onSnapshot(commentStore.commentsCollectionRef, async (querySnapshot) => {
     commentStore.length = await commentStore.comments.length
     commentStore.comments = []
+    commentStore.fbComments = []
     querySnapshot.forEach(async (doc) => {
       const comment = {
-        id: route.params.id,
         uniqueId: doc.id,
         detail: doc.data().detail,
-        isOpen: doc.data().isOpen
+        isOpen: doc.data().isOpen,
+        id: doc.data().id
       } as any
 
       await commentStore.comments.push(comment)
+      await commentStore.fbComments.push(comment)
       commentStore.length = await commentStore.comments.length
     })
   })
 }
 
 onMounted(() => {
+  commentStore.comments = commentStore.fbComments.filter((item: any) => item.id == route.params.id)
   commentStore.comments.forEach((item: any) => {
     item.isOpen = false
   })
   getComments()
+})
+
+const comments = computed(() => {
+  return commentStore.fbComments.filter((item: any) => item.id == route.params.id)
+})
+const commentsLen = computed(() => {
+  return commentStore.fbComments.filter((item: any) => item.id == route.params.id).length
 })
 
 const openNestedComment = (id: String) => {

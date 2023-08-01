@@ -1,7 +1,7 @@
 1. Authentication: Sing up✅ [feature] && Sing in✅ [feature]
 2. Sorted by added time [feature]✅
 3. Filter Feed [feature]✅
-4. Comment Filter for each page [feature]
+4. Comment Filter for each page [feature] ✅
 5. Nested Comment [feature]
 6. Comment count in the HomeView [feature]
 7. Edit Feedback [feature]
@@ -10,7 +10,7 @@
 10. Not Feedback [bug]
 11. Loading [feature]
 12. Error message genarate [feature] ✅
-13. Logout [feature]
+13. Logout [feature]✅
 
 Ro'yxatdan o'tish nimaga kerak?
   1. Ro'yxatdan o'tgandan keyin username headerda chiqib turishi kerak va o'chib ketmasligi kerak. Uni to'g'ridan to'g'ri firebasedan olishi kerak. Uning uchun accessToken orqali firebasega request jo'natish kerak bo'ladi.

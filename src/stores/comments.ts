@@ -8,6 +8,7 @@ import router from '@/router'
 export const useCommentStore = defineStore('comments', {
   state: () => {
     return {
+      fbComments: [] as any,
       comments: [] as any,
       commentsCollectionRef: collection(db, "comments"),
       length: 0

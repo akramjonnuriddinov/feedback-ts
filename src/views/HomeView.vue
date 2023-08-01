@@ -36,6 +36,7 @@ const feedsCollectionQuery = query(feedStore.feedsCollectionRef, orderBy('date',
 const getFeeds = () => {
   onSnapshot(feedsCollectionQuery, async (querySnapshot) => {
     feedStore.feeds = []
+    feedStore.fbFeeds = []
     feedStore.length = await feedStore.feeds.length
     querySnapshot.forEach(async (doc) => {
       const feed = {
